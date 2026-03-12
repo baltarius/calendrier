@@ -16,6 +16,141 @@ from dateutil.easter import easter
 from PIL import Image, ImageDraw, ImageFont
 
 
+# unused by code - reference for country>subdiv>timezone
+LOCATION_DATA = {
+    "Canada": {
+        "code": "CA",
+         "subareas": {
+            "New Brunswick": {"code": "NB", "tz": "America/Moncton"},
+            "Nova Scotia": {"code": "NS", "tz": "America/Halifax"},
+            "Prince Edward Island": {"code": "PE", "tz": "America/Halifax"},
+            "Newfoundland and Labrador": {"code": "NL", "tz": "America/St_Johns"},
+            "Quebec": {"code": "QC", "tz": "America/Montreal"},
+            "Ontario": {"code": "ON", "tz": "America/Toronto"},
+            "Manitoba": {"code": "MB", "tz": "America/Winnipeg"},
+            "Saskatchewan": {"code": "SK", "tz": "America/Regina"},
+            "Alberta": {"code": "AB", "tz": "America/Edmonton"},
+            "British Columbia": {"code": "BC", "tz": "America/Vancouver"},
+            "Yukon": {"code": "YT", "tz": "America/Whitehorse"},
+            "Northwest Territories": {"code": "NT", "tz": "America/Yellowknife"},
+            "Nunavut": {"code": "NU", "tz": "America/Iqaluit"},
+        }
+    },
+    "United States": {
+        "code": "US",
+        "subareas": {
+            "Alabama": {"code": "AL", "tz": "America/Chicago"},
+            "Alaska": {"code": "AK", "tz": "America/Anchorage"},
+            "Arizona": {"code": "AZ", "tz": "America/Phoenix"},
+            "Arkansas": {"code": "AR", "tz": "America/Chicago"},
+            "California": {"code": "CA", "tz": "America/Los_Angeles"},
+            "Colorado": {"code": "CO", "tz": "America/Denver"},
+            "Connecticut": {"code": "CT", "tz": "America/New_York"},
+            "Delaware": {"code": "DE", "tz": "America/New_York"},
+            "Florida": {"code": "FL", "tz": "America/New_York"},
+            "Georgia": {"code": "GA", "tz": "America/New_York"},
+            "Hawaii": {"code": "HI", "tz": "Pacific/Honolulu"},
+            "Idaho": {"code": "ID", "tz": "America/Boise"},
+            "Illinois": {"code": "IL", "tz": "America/Chicago"},
+            "Indiana": {"code": "IN", "tz": "America/Indiana/Indianapolis"},
+            "Iowa": {"code": "IA", "tz": "America/Chicago"},
+            "Kansas": {"code": "KS", "tz": "America/Chicago"},
+            "Kentucky": {"code": "KY", "tz": "America/New_York"},
+            "Louisiana": {"code": "LA", "tz": "America/Chicago"},
+            "Maine": {"code": "ME", "tz": "America/New_York"},
+            "Maryland": {"code": "MD", "tz": "America/New_York"},
+            "Massachusetts": {"code": "MA", "tz": "America/New_York"},
+            "Michigan": {"code": "MI", "tz": "America/New_York"},
+            "Minnesota": {"code": "MN", "tz": "America/Chicago"},
+            "Mississippi": {"code": "MS", "tz": "America/Chicago"},
+            "Missouri": {"code": "MO", "tz": "America/Chicago"},
+            "Montana": {"code": "MT", "tz": "America/Denver"},
+            "Nebraska": {"code": "NE", "tz": "America/Chicago"},
+            "Nevada": {"code": "NV", "tz": "America/Los_Angeles"},
+            "New Hampshire": {"code": "NH", "tz": "America/New_York"},
+            "New Jersey": {"code": "NJ", "tz": "America/New_York"},
+            "New Mexico": {"code": "NM", "tz": "America/Denver"},
+            "New York": {"code": "NY", "tz": "America/New_York"},
+            "North Carolina": {"code": "NC", "tz": "America/New_York"},
+            "North Dakota": {"code": "ND", "tz": "America/Chicago"},
+            "Ohio": {"code": "OH", "tz": "America/New_York"},
+            "Oklahoma": {"code": "OK", "tz": "America/Chicago"},
+            "Oregon": {"code": "OR", "tz": "America/Los_Angeles"},
+            "Pennsylvania": {"code": "PA", "tz": "America/New_York"},
+            "Rhode Island": {"code": "RI", "tz": "America/New_York"},
+            "South Carolina": {"code": "SC", "tz": "America/New_York"},
+            "South Dakota": {"code": "SD", "tz": "America/Chicago"},
+            "Tennessee": {"code": "TN", "tz": "America/Chicago"},
+            "Texas": {"code": "TX", "tz": "America/Chicago"},
+            "Utah": {"code": "UT", "tz": "America/Denver"},
+            "Vermont": {"code": "VT", "tz": "America/New_York"},
+            "Virginia": {"code": "VA", "tz": "America/New_York"},
+            "Washington": {"code": "WA", "tz": "America/Los_Angeles"},
+            "West Virginia": {"code": "WV", "tz": "America/New_York"},
+            "Wisconsin": {"code": "WI", "tz": "America/Chicago"},
+            "Wyoming": {"code": "WY", "tz": "America/Denver"},
+        }
+    },
+    "France": {
+        "code": "FR",
+        "subareas": {
+            "Metropolitan France": {
+                "code": None,
+                "tz": "Europe/Paris"
+            }
+        }
+    },
+    "United Kingdom": {
+        "code": "UK",
+        "subareas": {
+            "England": {"code": "ENG", "tz": "Europe/London"},
+            "Scotland": {"code": "SCT", "tz": "Europe/London"},
+            "Wales": {"code": "WLS", "tz": "Europe/London"},
+            "Northern Ireland": {"code": "NIR", "tz": "Europe/London"},
+        }
+    },
+    "Australia": {
+        "code": "AU",
+        "subareas": {
+
+            "New South Wales": {"code": "NSW", "tz": "Australia/Sydney"},
+            "Victoria": {"code": "VIC", "tz": "Australia/Melbourne"},
+            "Queensland": {"code": "QLD", "tz": "Australia/Brisbane"},
+            "Western Australia": {"code": "WA", "tz": "Australia/Perth"},
+            "South Australia": {"code": "SA", "tz": "Australia/Adelaide"},
+            "Tasmania": {"code": "TAS", "tz": "Australia/Hobart"},
+
+            "Australian Capital Territory": {"code": "ACT", "tz": "Australia/Canberra"},
+            "Northern Territory": {"code": "NT", "tz": "Australia/Darwin"},
+        }
+    },
+    "Netherlands": {
+        "code": "NL",
+        "subareas": {
+            "Netherlands": {"code": None, "tz": "Europe/Amsterdam"}
+        }
+    },
+    "Japan": {
+        "code": "JP",
+        "subareas": {
+            "Japan": {"code": None, "tz": "Asia/Tokyo"}
+        }
+    },
+    "South Korea": {
+        "code": "KR",
+        "subareas": {
+            "South Korea": {"code": None, "tz": "Asia/Seoul"}
+        }
+    },
+    "China": {
+        "code": "CN",
+        "subareas": {
+            "China": {"code": None, "tz": "Asia/Shanghai"}
+        }
+    }
+}
+
+
 def get_calendar_data(year: int, month: int):
     """
     Get the data/matrix for the calendar
@@ -34,6 +169,28 @@ def get_calendar_data(year: int, month: int):
         "month": month,
         "matrix": month_days
     }
+
+
+def nth_weekday_of_month(year, month, weekday, nth):
+        """
+        Calculate the nth weekday of a year/month
+
+        Args:
+            year as int for the year
+            month as int for the month (1~12)
+            weekday as int for the weekday (0~6 - 0=monday)
+            nth as int for the occurrence (1=first, 2=second, etc.)
+
+        Returns:
+            day as int for the date for the nth day of the year/month
+        """
+        cal = calendar.Calendar()
+        count = 0
+        for day in cal.itermonthdates(year, month):
+            if day.month == month and day.weekday() == weekday:
+                count += 1
+                if count == nth:
+                    return day
 
 
 def render_calendar_image(data, specials):
@@ -196,6 +353,27 @@ def get_public_holidays(year, month, country, subdiv=None):
     return {day.day: name for day, name in merged.items()}
 
 
+def get_family_observances(year, month):
+        """
+        Fetch family days like mother's day and father's day
+
+        Args:
+            year as int for the year
+            month as int for the month (1~12)
+
+        Returns:
+            events as dict for the family days of the year/month
+        """
+        events = {}
+        if month == 5:
+            mothers = nth_weekday_of_month(year, 5, calendar.SUNDAY, 2)
+            events[mothers.day] = "Mother's Day"
+        if month == 6:
+            fathers = nth_weekday_of_month(year, 6, calendar.SUNDAY, 3)
+            events[fathers.day] = "Father's Day"
+        return events
+
+
 def get_easter_related(year, month):
     """
     Checks for Easter dates with the year/month
@@ -220,6 +398,40 @@ def get_easter_related(year, month):
         if day.month == month:
             events[day.day] = name
     return events
+
+
+def get_astronomical_events(year, month):
+        """
+        Generates the days for the Equinoxes and Solstices of the year/month
+
+        Args:
+            year as int for the year
+            month as int for the month (1~12)
+
+        Used by:
+            get_all_special_dates()
+
+        Returns:
+            events as dict for the astral events of the year/month
+        """
+        events = {}
+        spring = ephem.next_vernal_equinox(f"{year}/1/1")
+        spring_date = ephem.Date(spring).datetime().date()
+        summer = ephem.next_summer_solstice(f"{year}/1/1")
+        summer_date = ephem.Date(summer).datetime().date()
+        autumn = ephem.next_autumnal_equinox(f"{year}/1/1")
+        autumn_date = ephem.Date(autumn).datetime().date()
+        winter = ephem.next_winter_solstice(f"{year}/1/1")
+        winter_date = ephem.Date(winter).datetime().date()
+        for day, name in [
+            (spring_date, "Spring Equinox"),
+            (summer_date, "Summer Solstice"),
+            (autumn_date, "Autumn Equinox"),
+            (winter_date, "Winter Solstice"),
+        ]:
+            if day.year == year and day.month == month:
+                events[day.day] = name
+        return events
 
 
 def merge_event_dicts(*dicts):
@@ -293,7 +505,8 @@ def get_all_special_dates(year, month, country, subdiv=None, timez=None):
     dst = get_dst_transitions(year, month, timez) if timez else {}
     recurring = get_recurring_observances(month)
     easter_related = get_easter_related(year, month)
-    merged_events =  merge_event_dicts(public, astro, dst, recurring, easter_related)
+    family = get_family_observances(year, month)
+    merged_events =  merge_event_dicts(public, astro, dst, recurring, easter_related, family)
     render_calendar_image(data, merged_events)
 
 
